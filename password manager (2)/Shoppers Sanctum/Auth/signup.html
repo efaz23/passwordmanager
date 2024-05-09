@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body>
+        <div id="content_container">
+            <div id="form_container">
+                <div id="form_header_container">
+                    <h2 id="form_header"> Register Now</h2>
+                </div>
+
+                <div id="form_content_container">
+                    <div id="form_content_inner_container">
+                        <input type="text" id="full_name" placeholder="Full name" autocomplete="name">
+                        <input type="email" id="email" placeholder="Email" autocomplete="email">
+                        <input type="password" id="password" placeholder="New Password" autocomplete="password">
+                        <div id="button_container">
+                            <a href="login.html"> 
+                                <button id="buttonText" class="hover">Login</button> 
+                            </a>
+                            <button onclick="register()" id="register" class="hover">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        var firebaseConfig = {
+      apiKey: "AIzaSyC8s7xvtydPKxy5IIfW2i8Kj3kdC1TivMs",
+      authDomain: "authentication-61106.firebaseapp.com",
+      databaseURL: "https://authentication-61106-default-rtdb.firebaseio.com",
+      projectId: "authentication-61106",
+      storageBucket: "authentication-61106.appspot.com",
+      messagingSenderId: "835806655122",
+      appId: "1:835806655122:web:4a63ba030178adef3bac4b",
+      measurementId: "G-VFNL5Y5E1B"
+    };
+    
+    
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // Initialize variables
+    const auth = firebase.auth()
+    const database = firebase.database()
+    
+    </script>
+
+    <!-- Our script must be loaded after firebase references -->
+    <script src="index.js"></script>
+</html>

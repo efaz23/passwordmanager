@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoppers Sanctum</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Shoppers Sanctum</div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        
+            <li id="logOut">Log Out</li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Password Manager</h1>
+        <p>We're thrilled to have you here. Your digital life contains a myriad of passwords, and we know how
+            challenging it can be to manage them all. That's why we're here to make it easy for you.</p>
+        <h2>Your Passwords <span id="alert">(Copied!)</span></h2> 
+        <table>
+            <tr>
+                <th>Website</th>
+                <th>Username </th>
+                <th>Password</th>
+                <th>Delete</th>
+            </tr> 
+ 
+        </table>
+
+        <h2>Add a Password</h2>
+        <form action="/submit" method="post" id="manager">
+
+            <!-- Text input for website -->
+            <label for="website">Website:</label>
+            <input type="text" id="website" name="website" required>
+            <br><br>
+
+            <!-- Text input for username -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br><br>
+
+            <!-- Password input -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+
+            <button class="genButton">Generate Password</button>
+<br>
+            <!-- Submit button -->
+            <button class="btn" type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+<script>
+    var firebaseConfig = {
+  apiKey: "AIzaSyC8s7xvtydPKxy5IIfW2i8Kj3kdC1TivMs",
+  authDomain: "authentication-61106.firebaseapp.com",
+  databaseURL: "https://authentication-61106-default-rtdb.firebaseio.com",
+  projectId: "authentication-61106",
+  storageBucket: "authentication-61106.appspot.com",
+  messagingSenderId: "835806655122",
+  appId: "1:835806655122:web:4a63ba030178adef3bac4b",
+  measurementId: "G-VFNL5Y5E1B"
+};
+
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// Initialize variables
+const auth = firebase.auth()
+const database = firebase.database()
+
+</script>
+<script src="script.js"></script>
+
+</html>
