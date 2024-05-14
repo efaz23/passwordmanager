@@ -39,6 +39,17 @@ nav {
     align-items: center;
 }
 
+#message {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+
+    border: 1px solid green;
+    border-radius: 5px;
+    color: green;
+    text-align: center;
+}
+
 
 ul {
     display: flex;

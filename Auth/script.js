@@ -1,7 +1,21 @@
+
+
+// Function to display a message on the screen
+function showMessage(message) {
+    const messageElement = document.getElementById('message');
+    messageElement.innerText = message;
+    messageElement.style.display = 'block';
+
+    setTimeout(() => {
+        messageElement.style.display = 'none';
+    }, 3000); // Hide message after 3 seconds
+}
+
+
 // Firebase password storage function
 const savePasswordToFirebase = (website, username, password) => {
     if (!firebase.auth().currentUser) {
-        alert("Not logged in. Please log in to save passwords.");
+        showMessage("Not logged in. Please log in to save passwords.");
         return;
     }
     const userId = firebase.auth().currentUser.uid;
@@ -10,12 +24,14 @@ const savePasswordToFirebase = (website, username, password) => {
         username: username,
         password: password  // Consider encrypting this password before storage in production
     }).then(() => {
-        alert("Password Saved");
+        showMessage("Password Saved");
+        showPasswords();  // Update the table after saving
     }).catch(error => {
         console.error("Error saving password: ", error);
-        alert("Failed to save password: " + error.message);
+        showMessage("Failed to save password: " + error.message);
     });
-};
+}
+
 
 // Function to mask passwords in UI
 function maskPassword(pass) {
@@ -25,14 +41,12 @@ function maskPassword(pass) {
 // Function to copy password to clipboard
 function copyText(txt) {
     navigator.clipboard.writeText(txt).then(() => {
-        document.getElementById("alert").style.display = "inline";
-        setTimeout(() => {
-            document.getElementById("alert").style.display = "none";
-        }, 2000);
-    }, () => {
-        alert("Clipboard copying failed");
+        showMessage("Password copied to clipboard");
+    }).catch(() => {
+        showMessage("Clipboard copying failed");
     });
 }
+
 
 // Function to generate a random password
 function generateRandomPassword() {
@@ -49,7 +63,7 @@ function generateRandomPassword() {
 // Function to delete a password
 const deletePassword = (website) => {
     if (!firebase.auth().currentUser) {
-        alert("Not logged in. Please log in to delete passwords.");
+        showMessage("Not logged in. Please log in to delete passwords.");
         return;
     }
     const userId = firebase.auth().currentUser.uid;
@@ -58,14 +72,15 @@ const deletePassword = (website) => {
         snapshot.forEach((childSnapshot) => {
             if (childSnapshot.val().website === website) {
                 passwordsRef.child(childSnapshot.key).remove().then(() => {
-                    alert(`Successfully deleted ${website}'s password`);
+                    showMessage(`Successfully deleted ${website}'s password`);
+                    showPasswords();  // Update the table after deleting
                 }).catch(error => {
-                    alert("Failed to delete password: " + error.message);
+                    showMessage("Failed to delete password: " + error.message);
                 });
             }
         });
     });
-};
+}
 
 // Function to display passwords fetched from Firebase
 const showPasswords = () => {
@@ -112,18 +127,18 @@ document.querySelector(".btn").addEventListener("click", (e) => {
     const password = document.getElementById('password').value;
 
     if (website.trim() === "" || username.trim() === "" || password.trim() === "") {
-        alert("Please fill all the fields before submitting.");
+        showMessage("Please fill all the fields before submitting.");
         return;
     }
 
     savePasswordToFirebase(website, username, password);
-});
+})
 
 document.getElementById('generatePasswordButton').addEventListener('click', (e) => {
     e.preventDefault();  // Prevent form submission
     const generatedPassword = generateRandomPassword();
     document.getElementById('password').value = generatedPassword;  // Autofill password field
-});
+})
 
 // Handle authentication state changes
 firebase.auth().onAuthStateChanged(function(user) {
@@ -133,7 +148,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     } else {
         console.log("User is signed out");
     }
-});
+})
 
 document.getElementById('logOut').addEventListener('click', function() {
     auth.signOut().then(function() {
@@ -142,4 +157,4 @@ document.getElementById('logOut').addEventListener('click', function() {
     }).catch(function(error) {
         console.error(error);
     });
-});
+})
