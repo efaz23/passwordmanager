@@ -26,6 +26,20 @@ nav {
     cursor: pointer;
 }
 
+.copy-icon {
+    cursor: pointer;
+    width: 16px; /* Adjust size as needed */
+    height: 16px; /* Adjust size as needed */
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+
 ul {
     display: flex;
    

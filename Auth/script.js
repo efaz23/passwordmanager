@@ -18,12 +18,8 @@ const savePasswordToFirebase = (website, username, password) => {
 };
 
 // Function to mask passwords in UI
-function maskPassword(pass){
-    let str = "";
-    for (let index = 0; index < pass.length; index++) {
-        str += "*";
-    }
-    return str;
+function maskPassword(pass) {
+    return '*'.repeat(pass.length);
 }
 
 // Function to copy password to clipboard
@@ -77,7 +73,12 @@ const showPasswords = () => {
             <tr>
                 <td>${element.website}</td>
                 <td>${element.username}</td>
-                <td>${maskPassword(element.password)}</td>
+                <td>
+                    <div class="password-container">
+                        <span>${maskPassword(element.password)}</span>
+                        <img src="copy.svg" class="copy-icon" onclick="copyText('${element.password}')" alt="Copy">
+                    </div>
+                </td>
                 <td><button class="btnsm" onclick="deletePassword('${element.website}')">Delete</button></td>
             </tr>
         `).join('');
@@ -89,6 +90,7 @@ const showPasswords = () => {
         </tr> ${rows}`;
     });
 };
+
 
 // Event listener for adding new passwords
 document.querySelector(".btn").addEventListener("click", (e) => {
@@ -116,15 +118,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 document.getElementById('logOut').addEventListener('click', function() {
-    // Call the signOut() method
     auth.signOut().then(function() {
-        // Clear user data
         localStorage.clear(); // or sessionStorage.clear();
-  
-        // Redirect to login page
-        window.location.href = 'login.html'; // replace 'login.html' with your actual login page URL
+        window.location.href = 'login.html';
     }).catch(function(error) {
-        // Handle any errors
         console.error(error);
     });
-  });
+});
