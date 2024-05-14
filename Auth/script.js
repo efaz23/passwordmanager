@@ -34,6 +34,18 @@ function copyText(txt) {
     });
 }
 
+// Function to generate a random password
+function generateRandomPassword() {
+    const length = 12;  // Minimum length for a strong password
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+    let password = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * charset.length);
+        password += charset[randomIndex];
+    }
+    return password;
+}
+
 // Function to delete a password
 const deletePassword = (website) => {
     if (!firebase.auth().currentUser) {
@@ -105,6 +117,12 @@ document.querySelector(".btn").addEventListener("click", (e) => {
     }
 
     savePasswordToFirebase(website, username, password);
+});
+
+document.getElementById('generatePasswordButton').addEventListener('click', (e) => {
+    e.preventDefault();  // Prevent form submission
+    const generatedPassword = generateRandomPassword();
+    document.getElementById('password').value = generatedPassword;  // Autofill password field
 });
 
 // Handle authentication state changes

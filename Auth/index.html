@@ -39,26 +39,14 @@
         </table>
 
         <h2>Add a Password</h2>
-        <form action="/submit" method="post" id="manager">
-
-            <!-- Text input for website -->
+        <form id="manager">
             <label for="website">Website:</label>
-            <input type="text" id="website" name="website" required>
-            <br><br>
-
-            <!-- Text input for username -->
+            <input type="text" id="website" name="website" required><br><br>
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <br><br>
-
-            <!-- Password input -->
+            <input type="text" id="username" name="username" required><br><br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-
-            <button class="genButton">Generate Password</button>
-<br>
-            <!-- Submit button -->
+            <input type="password" id="password" name="password" required><br>
+            <button type="button" id="generatePasswordButton" class="genButton">Generate Password</button><br>
             <button class="btn" type="submit">Submit</button>
         </form>
     </div>
