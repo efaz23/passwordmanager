@@ -127,6 +127,18 @@ function login() {
         });
 }
 
+// Handle log out
+document.getElementById('logOut').addEventListener('click', function() {
+    firebase.auth().signOut().then(function() {
+        console.log('Sign out successful');
+        localStorage.clear(); // Clear the localStorage or sessionStorage if you're using it
+        window.location.href = 'login.html'; // Redirect to the login page or any other page you want
+    }).catch(function(error) {
+        console.error('Error signing out: ', error);
+        showMessage('Failed to log out: ' + error.message, 'red');
+    });
+});
+
 document.getElementById('resetPasswordButton').addEventListener('click', function() {
     var emailAddress = document.getElementById('email').value; // Ensure this ID matches your email input field
 
@@ -143,6 +155,8 @@ document.getElementById('resetPasswordButton').addEventListener('click', functio
     });
 });
 
+
+
 // Validate Functions
 function validate_email(email) {
     var expression = /^[^@]+@\w+(\.\w+)+\w$/;
@@ -157,3 +171,15 @@ function validate_password(password) {
 function validate_field(field) {
     return field != null && field.length > 0;
 }
+
+
+
+// Handle authentication state changes
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        console.log("User is signed in");
+        showPasswords();  // Refresh passwords on auth state change
+    } else {
+        console.log("User is signed out");
+    }
+});
