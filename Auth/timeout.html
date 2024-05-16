@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Timeout</title>
+        <link rel="stylesheet" href="404.css">
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    </head>
+<body>
+    <h1 aria-label="408 Error">4<span></span>8</h1>
+    <h2>Server request timed out.</h2>
+    <button id="retry" class="glow-on-hover" type="button">Take me back</button>
+
+    <script>
+
+var firebaseConfig = {
+  apiKey: "AIzaSyC8s7xvtydPKxy5IIfW2i8Kj3kdC1TivMs",
+  authDomain: "authentication-61106.firebaseapp.com",
+  databaseURL: "https://authentication-61106-default-rtdb.firebaseio.com",
+  projectId: "authentication-61106",
+  storageBucket: "authentication-61106.appspot.com",
+  messagingSenderId: "835806655122",
+  appId: "1:835806655122:web:4a63ba030178adef3bac4b",
+  measurementId: "G-VFNL5Y5E1B"
+};
+
+        // Initialize Firebase
+        var firebaseConfig = {
+            // Your Firebase configuration goes here
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the button
+        const retryButton = document.getElementById('retry');
+
+        // Add a click event listener to the button
+        retryButton.addEventListener('click', () => {
+            // Redirect to the login page
+            window.location.href = 'login.html';
+        });
+
+        
+    </script>
+</body>
+</html>

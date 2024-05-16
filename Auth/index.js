@@ -139,6 +139,54 @@ document.getElementById('logOut').addEventListener('click', function() {
     });
 });
 
+
+
+let timeoutId; // Variable to store the timeout ID
+const TIMEOUT_DURATION = 86400000; // 24 hours in milliseconds (1 day)
+
+// Function to handle timeout and log out the user
+function handleTimeout() {
+  firebase.auth().signOut().then(() => {
+    console.log('User signed out due to timeout');
+    localStorage.clear(); // Clear localStorage or sessionStorage
+    window.location.href = 'timeout.html'; // Redirect to a timeout page
+  }).catch((error) => {
+    console.error('Error signing out due to timeout: ', error);
+    showMessage('Failed to log out due to timeout: ' + error.message, 'red');
+  });
+}
+// Reset the timeout on user activity
+document.addEventListener('click', resetTimeout);
+document.addEventListener('keydown', resetTimeout);
+
+// Function to reset the timeout
+function resetTimeout() {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(handleTimeout, TIMEOUT_DURATION);
+}
+
+// Set the initial timeout when the page loads
+resetTimeout();
+
+// Get a reference to the back button
+const backButton = document.querySelector('button');
+
+// Add an event listener to the back button
+backButton.addEventListener('click', () => {
+  // Refresh the current page
+  window.location.reload();
+});
+
+// Prevent going back to the previous page
+window.addEventListener('popstate', (event) => {
+  event.preventDefault();
+  console.log('Prevented going back to the previous page');
+});
+
+// Add a new state to the browser history
+window.history.pushState(null, null, window.location.href);
+
+
 document.getElementById('resetPasswordButton').addEventListener('click', function() {
     var emailAddress = document.getElementById('email').value; // Ensure this ID matches your email input field
 
